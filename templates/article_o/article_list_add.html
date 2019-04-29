@@ -1,0 +1,61 @@
+{% extends "article_o/base.html" %}
+{% load cache %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/article_o/article_list.css">
+    <link rel="stylesheet" href="/static/css/article_o/public.css">
+
+    <style>
+        .container{
+            height: auto;
+            min-height: 600px;
+            float: left;
+            width: 50%;
+            min-width: 300px;
+            margin-left: 120px;
+        }
+
+        .art_title{
+            font-size: 15px;
+        }
+    </style>
+{% endblock %}
+<{% block title %}<title>前端展示页</title>{% endblock %}
+{% block content %}
+       <div class="container">
+       <div class="small_title n">最新文章</div>
+        {% for article in data %}
+            <div class="img"><a href="/article/?id={{ article.id }}" target="_blank">
+                <img src="{{ article.img }}"></a></div>
+            <div class="info">
+                <div class="art_title" id_val="{{ article.id }}">
+                    <a href="/article/?id={{ article.id }}" target="_blank">{{ article.title }}</a>
+                </div>
+                <div class="art_oth">
+                    <span class="author">{{ article.author }}</span>
+                    <span class="time">{{ article.pub_time | date:"Y-m-d H:i:s" }}</span>
+                </div>
+            </div>
+            <hr style="color: #666666">
+        {% endfor %}
+        </div>
+        {% cache 6000 hot %}
+        <div class="hot float-right">
+            <div class="small_title f">最热文章</div>
+                {% for m in most_hot %}
+                    <div class="l_30"><a href="/article/?id={{ m.id }}" target="_blank">{{ m.title }}</a></div>
+                {% endfor %}
+            <div class="small_title s">最多评论</div>
+                {% for m in most_comment %}
+                    <div class="l_30"><a href="/article/?id={{ m.article_id }}" target="_blank">
+                        {{ m.article__title }}</a></div>
+                {% endfor %}
+        </div>
+        {% endcache %}
+        <div class="get_more cursor">加载更多</div>
+{% endblock %}
+{% block js %}
+    <script src="/static/js/jQuery-2.1.4.min.js" type="text/javascript"></script>
+        <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/public.js" type="text/javascript"></script>
+    <script src="/static/js/article_o/list.js" type="text/javascript"></script>
+{% endblock %}

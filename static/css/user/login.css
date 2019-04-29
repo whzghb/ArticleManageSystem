@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url("/static/img/b_img02.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+.outer{
+    border: solid 1px burlywood;
+    position: absolute;
+    height: 300px;
+    width: 400px;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -150px;
+}
+
+.input_area, .title{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.inner{
+    margin-bottom: 10px;
+}
+
+.login{
+    cursor: pointer;
+}
+
+.register{
+    cursor: pointer;
+}

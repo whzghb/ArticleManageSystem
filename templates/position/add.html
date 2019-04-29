@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: verdana,arial,sans-serif;
+        }
+
+        .table{
+            border: solid 1px burlywood;
+            border-bottom: none;
+            font-size:13px;
+	        color:#333333;
+        }
+
+        th{
+            border-bottom: solid 1px burlywood;
+            height: 65px;
+        }
+
+        .l_th{
+            border-right: solid 1px burlywood;
+            width: 150px;
+        }
+
+        .inner_check{
+            display: block;
+            float: left;
+            padding-left: 30px;
+        }
+
+        .pos_name{
+            height: 30px;
+            margin-left: 30px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .submit_pos{
+            height: 30px;
+            float: right;
+            margin-right: 50px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: solid 1px burlywood;
+            width: 40px;
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="pos_name">职位名称: <input type="text" name="name" id="pos_name"></div>
+        <div>
+            <table class="table">
+                {% for group, right in rights.items %}
+                    <tr>
+                        <th group_id="{{ group }}" class="l_th">
+                            <span>
+                            {{ right.0.1 }}<input type="checkbox" name="group" class="group" value="{{ group }}">
+                            </span>
+                        </th>
+                        <th class="r_th">
+                            {% for r in right %}
+                            <span class="inner_check">
+                                {{ r.2 }}<input type="checkbox" name="right" class="right" value="{{ r.0 }}">
+                            </span>
+                            {% endfor %}
+                        </th>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="submit_pos">添加</div>
+    </div>
+</body>
+<script src="/static/js/jQuery-2.1.4.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+<script src="/static/js/system/system.js"></script>
+</html>

@@ -1,0 +1,9 @@
+.add_admin{
+    font-size: 15px;
+    margin-left: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    border: solid 1px burlywood;
+    width: 75px;
+}

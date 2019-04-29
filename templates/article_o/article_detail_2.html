@@ -1,0 +1,259 @@
+{% extends "article_o/base.html" %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/article_o/article_detail.css">
+    {#    <link rel="stylesheet" href="/static/css/user/login.css">#}
+{% endblock %}
+{% block title %}
+    <title>{{ data.title }}</title>
+{% endblock %}
+{% block content %}
+    <div class="other">
+    <div class="detail_content">
+    <h2 class="title">{{ data.title }}</h2>
+    <div class="detail_content" style="max-width: 900px">{{ data.content | safe }}</div>
+    <div class="bo_top">文章信息</div>
+    <div class="article_info">
+        <div>作者:&nbsp;{{ data.author }}</div>
+        <div>分类:&nbsp;{{ data.category }}</div>
+        <div>标签:
+            {% for tg in data.tags %}
+                {{ tg.name }}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="bo_top">全部评价</div>
+    <div class="view">
+        <span class="good cursor" id_val="{{ article_id }}">好评</span>
+        <span>({{ good_view }})</span>
+        <span class="bad_c cursor" id_val="{{ article_id }}">差评</span>
+        <span>({{ bad_view }})</span>
+        <span class="tip"></span>
+    </div>
+    <div class="bo_top">用户评论</div>
+    <div class="comment">
+        <textarea name="comment" class="text_area" id="comm_to_art" placeholder=""></textarea>
+        <span class="submit_comment cursor" id_val="{{ article_id }}">提交</span>
+    </div>
+    <div class="bo_top">全部评论({{ comm_count }})</div>
+    <div class="all_comments">
+        {% if not comments %}
+            <div>&nbsp;&nbsp;&nbsp;暂无评论</div>
+        {% else %}
+            {% for comment in comments %}
+                {% if comment.parent_comment.id == None %}
+                    <div class="each_comment">
+                    <span class="size_small">{{ comment.user.name }}:</span>
+                    <span class="size_small">{{ comment.comment_time | date:"Y-m-d H:i:s" }}&nbsp;</span>
+                    {% if comment.user.name != user_name %}
+                        {% if comment.is_deleted == 0 %}
+                            <span class="comm_good cursor" id_val="{{ comment.id }}">好评</span><span>({{ comment.good_view }})</span>
+                            <span class="comm_bad cursor" id_val="{{ comment.id }}">差评</span><span>({{ comment.bad_view }})</span>
+                            <span></span>
+                            <span class="click_say_back cursor">&nbsp;回复</span>
+                            <div class="no_display">
+                            <textarea class="say_back" style="width: 300px; height: 80px">
+                </textarea><span class="submit_back cursor" id_val="{{ comment.id }}"
+                                 article_id="{{ article_id }}">提交</span>
+                        {% else %}
+                            <span class="click_say_back cursor"></span>
+                            <div class="no_display">
+                            <textarea class="say_back" style="width: 300px; height: 80px">
+                </textarea><span class="submit_back cursor" id_val="{{ comment.id }}"
+                                 article_id="{{ article_id }}">提交</span>
+                        {% endif %}
+                    </div>
+                    {% elif comment.is_deleted == 0 %}
+                        <span class="cursor del_com" id_val="{{ comment.id }}">&nbsp;删除</span>
+                    {% endif %}
+                {% if comment.is_deleted == 1 %}
+                    <p class="comm_content"><span class="bad">该评论已被删除</span></p>
+                {% elif comment.is_deleted == 2 %}
+                    <p class="comm_content"><span class="bad">该评论涉嫌违规，已被删除</span></p>
+                {% else %}
+                    <p class="comm_content"><span>{{ comment.content }}</span></p>
+                {% endif %}
+                </div>
+                {% else %}
+                    <div class="each_comment">
+                        {% if comment.parent_comment.user.name == user_name %}
+                            <span class="attention size_small">{{ comment.user.name }}:</span>
+                            <span class="attention size_small">{{ comment.comment_time | date:"Y-m-d H:i:s" }}&nbsp;</span>
+                            {% if comment.is_deleted == 0 %}
+                                <span class="comm_good cursor" id_val="{{ comment.id }}">好评</span><span>({{ comment.good_view }})</span>
+                            <span class="comm_bad cursor" id_val="{{ comment.id }}">差评</span><span>({{ comment.bad_view }})</span>
+                            <span></span>
+                                <span class="click_say_back cursor del_com">&nbsp;回复</span>
+                                <div class="no_display">
+                    <textarea class="say_back" style="width: 300px; height: 80px">
+                    </textarea>
+                                    <span class="submit_back cursor" id_val="{{ comment.id }}"
+                                          article_id="{{ article_id }}">提交</span>
+                                </div>
+                            {% else %}
+                                <span class="click_say_back cursor"></span>
+                                <div class="no_display">
+                    <textarea class="say_back" style="width: 300px; height: 80px">
+                    </textarea>
+                                    <span class="submit_back cursor" id_val="{{ comment.id }}"
+                                          article_id="{{ article_id }}">提交</span>
+                                </div>
+                            {% endif %}
+                            {% if comment.is_deleted == 0 and comment.parent_comment.is_deleted == 0 %}
+                                <p>
+                                    <span>{{ comment.content }}</span><span>//回复了你:</span><span>{{ comment.parent_comment.content }}</span>
+                                </p>
+                            {% elif comment.is_deleted == 0 and comment.parent_comment.is_deleted == 1 %}
+                                <p><span>{{ comment.content }}</span><span>//回复了你:</span><span class="bad">该评论已被删除</span></p>
+                            {% elif comment.is_deleted == 0 and comment.parent_comment.is_deleted == 2 %}
+                                <p><span>{{ comment.content }}</span><span>//回复了你:</span><span class="bad">该评论涉嫌违规，已被删除</span></p>
+                            {% elif comment.is_deleted == 1 and comment.parent_comment.is_deleted == 0 %}
+                                <p><span class="bad">该评论已被删除</span><span>//回复了你:</span><span>{{ comment.parent_comment.content }}</span></p>
+                            {% elif comment.is_deleted == 1 and comment.parent_comment.is_deleted == 1 %}
+                                <p><span class="bad">该评论已被删除</span><span>//回复了你:</span><span class="bad">该评论已被删除</span></p>
+                            {% elif comment.is_deleted == 1 and comment.parent_comment.is_deleted == 2 %}
+                                <p><span class="bad">该评论已被删除</span><span>//回复了你:</span><span class="bad">该评论涉嫌违规，已被删除</span></p>
+                            {% elif comment.is_deleted == 2 and comment.parent_comment.is_deleted == 0 %}
+                                <p><span
+                                        class="bad">该评论涉嫌违规，已被删除</span><span>//回复了你:</span><span>{{ comment.parent_comment.content }}</span>
+                                </p>
+                            {% elif comment.is_deleted == 2 and comment.parent_comment.is_deleted == 1 %}
+                                <p><span class="bad">该评论涉嫌违规，已被删除</span><span>//回复了你:</span><span class="bad">该评论已被删除</span></p>
+                            {% elif comment.is_deleted == 2 and comment.parent_comment.is_deleted == 2 %}
+                                <p><span class="bad">该评论涉嫌违规，已被删除</span><span>//回复了你:</span><span class="bad">该评论涉嫌违规，已被删除</span></p>
+                            {% endif %}
+                        {% else %}
+                            <span class="size_small">{{ comment.user.name }}:</span>
+                            <span class="size_small">{{ comment.comment_time | date:"Y-m-d H:i:s" }}&nbsp;</span>
+                            {% if comment.user.name != user_name %}
+                                {% if comment.is_deleted == 0 %}
+                                    <span class="comm_good cursor" id_val="{{ comment.id }}">好评</span><span>({{ comment.good_view }})</span>
+                            <span class="comm_bad cursor" id_val="{{ comment.id }}">差评</span><span>({{ comment.bad_view }})</span>
+                            <span></span>
+                                    <span class="click_say_back cursor">&nbsp;回复</span>
+                                    <div class="no_display">
+                    <textarea class="say_back" style="width: 300px; height: 80px">
+                    </textarea>
+                                        <span class="submit_back cursor" id_val="{{ comment.id }}"
+                                              article_id="{{ article_id }}">提交</span>
+                                    </div>
+                                {% else %}
+                                    <span class="click_say_back cursor"></span>
+                                    <div class="no_display">
+                    <textarea class="say_back" style="width: 300px; height: 80px">
+                    </textarea>
+                                        <span class="submit_back cursor" id_val="{{ comment.id }}"
+                                              article_id="{{ article_id }}">提交</span>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% if comment.is_deleted == 0 %}
+                                    <span class="del_com cursor" id_val="{{ comment.id }}">&nbsp;删除</span>
+                                {% else %}
+                                    <span class="click_say_back cursor"></span>
+                                {% endif %}
+                            {% endif %}
+                            {% if comment.is_deleted == 0 and comment.parent_comment.is_deleted == 0 %}
+                                <p>
+                                    <span>{{ comment.content }}</span><span>//@</span><span>{{ comment.parent_comment.user.name }}</span>:
+                                    <span>{{ comment.parent_comment.content }}</span>
+                                </p>
+                            {% elif comment.is_deleted == 0 and comment.parent_comment.is_deleted == 1 %}
+                                <p>
+                                    <span>{{ comment.content }}</span><span>//@</span><span>{{ comment.parent_comment.user.name }}</span>:
+                                    <span class="bad">该评论已被删除</span>
+                                </p>
+                            {% elif comment.is_deleted == 0 and comment.parent_comment.is_deleted == 2 %}
+                                <p>
+                                    <span>{{ comment.content }}</span><span>//@</span><span>{{ comment.parent_comment.user.name }}</span>:
+                                    <span class="bad">该评论涉嫌违规，已被删除</span>
+                                </p>
+                            {% elif comment.is_deleted == 1 and comment.parent_comment.is_deleted == 0 %}
+                                <p><span class="bad">该评论已被删除</span><span>//@</span><span>{{ comment.parent_comment.user.name }}</span>:
+                                    <span>{{ comment.parent_comment.content }}</span>
+                                </p>
+                            {% elif comment.is_deleted == 1 and comment.parent_comment.is_deleted == 1 %}
+                                <p><span
+                                        class="bad">该评论已被删除</span><span>//@</span><span>{{ comment.parent_comment.user.name }}</span>:
+                                    <span class="bad">该评论已被删除</span>
+                                </p>
+                            {% elif comment.is_deleted == 1 and comment.parent_comment.is_deleted == 2 %}
+                                <p><span
+                                        class="bad">该评论已被删除</span><span>//@</span><span>{{ comment.parent_comment.user.name }}</span>:
+                                    <span class="bad">该评论涉嫌违规，已被删除</span>
+                                </p>
+                            {% elif comment.is_deleted == 2 and comment.parent_comment.is_deleted == 0 %}
+                                <p><span
+                                        class="bad">该评论涉嫌违规，已被删除</span><span>//@</span><span>{{ comment.parent_comment.user.name }}</span>:
+                                    <span>{{ comment.parent_comment.content }}</span>
+                                </p>
+                            {% elif comment.is_deleted == 2 and comment.parent_comment.is_deleted == 1 %}
+                                <p><span
+                                        class="bad">该评论涉嫌违规，已被删除</span><span>//@</span><span>{{ comment.parent_comment.user.name }}</span>:
+                                    <span class="bad">该评论已被删除</span>
+                                </p>
+                            {% elif comment.is_deleted == 2 and comment.parent_comment.is_deleted == 2 %}
+                                <p><span
+                                        class="bad">该评论涉嫌违规，已被删除</span><span>//@</span><span>{{ comment.parent_comment.user.name }}</span>:
+                                    <span class="bad">该评论涉嫌违规，已被删除</span>
+                                </p>
+                            {% endif %}
+
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </div>
+        <div class="if_like">
+            <div class="bo_top">猜你喜欢</div>
+            {% if not if_like %}
+                <div class="each_if_like">暂无推荐文章</div>
+            {% else %}
+                {% for l in if_like %}
+                    <div class="each_if_like">
+                        <a href="/article/?id={{ l.0 }}">{{ l.1 }}</a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="hid no_display"></div>
+    <div class="outer2 log no_display">
+        <div class="title">用户登录</div>
+        <div class="input_area">
+            <div class="inner"><label for="name">用户名</label>
+                <input id="name2" type="text">
+            </div>
+            <div class="inner"><label for="password">密&nbsp;&nbsp;&nbsp;码</label>
+                <input id="password2" type="password">
+            </div>
+            <div class="inner" id="login">
+                <span class="undo cursor">取消</span>&nbsp;&nbsp;<span class="login">登录</span>
+            </div>
+            <div class="for_register">没有账号？<span href="/user/register/" style="color: aqua"
+                                                 class="cursor reg_cli">立即注册</span>
+            </div>
+        </div>
+    </div>
+    <div class="outer2 reg no_display">
+        <div class="title">用户注册</div>
+        <div class="input_area">
+            <div class="inner"><label for="name">用户名</label>
+                <input id="name3" type="text" maxlength="30">
+            </div>
+            <div class="inner"><label for="password">密&nbsp;&nbsp;&nbsp;码</label>
+                <input id="password3" type="password">
+            </div>
+            <div class="inner"><label for="re_password">请确认</label>
+                <input id="re_password3" type="password">
+            </div>
+            <span class="undo cursor">取消</span>&nbsp;&nbsp;<span class="register">注册</span>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="/static/js/article_o/article_o_detail_2.js" type="text/javascript"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+{% endblock %}

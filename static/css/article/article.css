@@ -1,0 +1,98 @@
+.all_content {
+    width: 100%;
+    height: auto;
+    border: solid 1px darkgrey;
+}
+
+.top {
+    width: auto;
+    height: auto;
+    margin-bottom: 5px;
+}
+
+.content {
+    border-top: solid 1px darkgrey;
+    min-height: 450px;
+}
+
+.submit .inner {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: solid 1px darkgrey;
+    background-color: beige;
+    cursor: pointer;
+}
+
+.submit {
+    padding-bottom: 40px;
+    padding-top: 20px;
+}
+
+.not_display {
+    display: none;
+}
+
+/*.page{*/
+/*position: absolute;*/
+/*left: 40px;*/
+/*bottom: 40px;*/
+/*}*/
+
+/*.inner_page{*/
+/*display: inline-block;*/
+/*float: left;*/
+/*padding-right: 10px;*/
+/*width: 48px;*/
+/*height: 30px;*/
+/*border: solid 1px burlywood;*/
+/*cursor: pointer;*/
+/*text-align: center;*/
+/*margin-bottom: 40px;*/
+/*}*/
+
+/*.cur_page{*/
+/*background-color: beige;*/
+/*}*/
+
+#reject_reason {
+    position: absolute;
+    left: 5px;
+    margin-bottom: 30px;
+}
+
+table.gridtable {
+    font-size: 11px;
+    color: #333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.gridtable th {
+    text-align: left;
+    border-width: 1px;
+    padding: 12px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+table.gridtable td {
+    border-width: 1px;
+    padding: 12px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.cursor {
+    cursor: pointer;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .page{
+        position: absolute;
+        left: 40px;
+        bottom: 40px;
+    }
+
+    .inner_page{
+        display: inline-block;
+        float: left;
+        padding-right: 10px;
+        width: 48px;
+        height: 30px;
+        border: solid 1px burlywood;
+        cursor: pointer;
+        text-align: center;
+        margin-bottom: 40px;
+        line-height: 30px;
+        margin-top: 40px;
+    }
+
+    .cur_page{
+        background-color: beige;
+    }
+
+    .cursor{
+        cursor: pointer;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="page">
+    <span class="inner_page first cursor">首页</span>
+    <span class="inner_page last cursor" cur_page="{{ cur_page }}">上一页</span>
+    {% for i in show_page %}
+        {% if i == cur_page %}
+            <span class="inner_page each_page cur_page cursor">{{ i }}</span>
+        {% else %}
+            <span class="inner_page each_page cursor">{{ i }}</span>
+        {% endif %}
+    {% endfor %}
+    <span class="inner_page next cursor" cur_page="{{ cur_page }}" end="{{ page_num }}">下一页</span>
+    <span class="inner_page end cursor" end="{{ page_num }}">尾页</span>
+</div>
+</body>
+<script src="/static/js/jQuery-2.1.4.min.js"></script>
+<script src="/static/js/page_o.js"></script>
+</html>

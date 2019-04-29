@@ -1,0 +1,49 @@
+{% extends "public/base.html" %}
+{% block css %}<link rel="stylesheet" href="/static/css/article/article_add.css">{% endblock %}
+{% block header %}
+    <div class="header">
+        作者:<div class="inner"><input id="author" type="text"></div>
+        标题:<div class="inner"><input id="title" type="text"></div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div id="editor"></div>
+{% endblock %}
+{% block footer %}
+    <div class="footer">
+        选择封面:<div class="inner"><img src="" style="visibility: hidden" id="img" alt=""><input type="file" id="feng_mian"></div>
+        选择分类:<div><input type="text" name="add_in" url="/admin/category/" cls="category" placeholder="添加分类"></div>
+        <div class="categorys inner">
+        {% for cat in category %}
+            <span><input class="category" type="radio" name="category" value="{{ cat.id }}">{{ cat.name }}</span>
+        {% endfor %}
+        </div>
+        选择标签:<div><input type="text" name="add_in" url="/admin/tag/" cls="tag" placeholder="添加标签"></div>
+        <div class="tags inner">
+        {% for tg in tag %}
+            <span><input class="tag" type="checkbox" name="tag" value="{{ tg.id }}">{{ tg.name }}</span>
+        {% endfor %}
+        </div>
+    </div>
+    <div class="submit">
+        <span class="inner to_draft">保存至草稿箱</span>
+        <span class="inner to_audit">提交至待审核</span>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="/static/js/jQuery-2.1.4.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/article_i/article_add.js"></script>
+    <script src="/static/js/wangEditor.min.js"></script>
+    <script>
+        var E = window.wangEditor;
+        var editor = new E('#editor');
+        editor.customConfig.uploadImgServer = '/common/uploads/img/';
+        editor.customConfig.uploadImgHeaders = {
+            "X-CSRFToken": $.cookie("csrftoken")
+        };
+        editor.customConfig.uploadImgMaxLength = 5;
+        editor.customConfig.uploadFileName = 'img';
+        editor.create();
+    </script>
+{% endblock %}

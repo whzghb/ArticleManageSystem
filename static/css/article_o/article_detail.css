@@ -1,0 +1,178 @@
+.view{
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+    margin-left: 20px;
+}
+
+hr{
+    display: none;
+    clear: both;
+}
+
+.text_area{
+    width: 300px;
+    height: 160px;
+    margin-left: 20px;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.no_display{
+    display: none;
+}
+
+.if_like{
+    padding-bottom: 20px;
+    /*margin-left: 20px;*/
+}
+
+.each_if_like{
+    margin-left: 20px;
+}
+
+.title{
+    text-align: center;
+    padding-bottom: 20px;
+    margin-top: 80px;
+}
+
+.size_small{
+    font-size: 14px;
+    font-style: italic;
+}
+
+.bo_top{
+    margin-top: 20px;
+    border-top: solid 1px beige;
+    font-weight: bold;
+}
+
+.attention{
+    color: red;
+}
+
+/*.comm_content{*/
+    /*padding-left: 30px;*/
+/*}*/
+
+/*.all_comments{*/
+    /*background-color: beige;*/
+/*}*/
+
+.each_comment{
+    border-bottom: solid 1px gray;
+    padding-bottom: 10px;
+    margin-left: 20px;
+}
+
+.click_say_back, .del_com, .del_com_sty{
+    float: right;
+    margin-right: 30px;
+    /*color: dodgerblue;*/
+    font-style: italic;
+}
+
+.article_info{
+    margin-left: 20px;
+}
+
+.alert-warning {
+    color: #666666;
+    /*background-color: #fcf8e3;*/
+    border-color: #faebcc;
+}
+
+.all_comments{
+    margin-left: 8px;
+}
+
+.outer{
+    border: solid 1px burlywood;
+    position: absolute;
+    height: 300px;
+    width: 400px;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -150px;
+}
+
+.input_area, .title{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.inner{
+    margin-bottom: 10px;
+}
+
+.login{
+    cursor: pointer;
+}
+
+.register{
+    cursor: pointer;
+}
+
+.hid{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: black !important;
+    z-index: 10;
+    opacity: 0.6;
+}
+
+.log, .reg{
+    position: fixed;
+    top: 230px;
+    height: 320px;
+    width: 380px;
+    left: 50%;
+    background: white;
+    margin-left: -190px;
+    margin-top: -50px;
+    z-index: 20;
+    opacity: 1;
+    text-align: center;
+}
+
+
+/*.reg{*/
+    /*position: fixed;*/
+    /*top: 230px;*/
+    /*height: 320px;*/
+    /*width: 380px;*/
+    /*left: 50%;*/
+    /*background-color: white;*/
+    /*margin-left: -190px;*/
+    /*z-index: 20;*/
+    /*opacity: 1;*/
+/*}*/
+
+.other{
+    /*z-index: 5;*/
+    margin-top: 110px;
+}
+
+.tanceng{
+    overflow: hidden;
+}
+
+.bad{
+    font-size: 5px;
+    text-decoration:line-through
+}
+
+.comm_good{
+    margin-left: 590px;
+}
+
+.comm_bad{
+    margin-left: 40px;
+}

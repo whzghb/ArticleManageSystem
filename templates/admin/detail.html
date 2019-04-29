@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: verdana,arial,sans-serif;
+        }
+
+        .table{
+            border: solid 1px burlywood;
+            border-bottom: none;
+            font-size:13px;
+	        color:#333333;
+        }
+
+        th{
+            border-bottom: solid 1px burlywood;
+            height: 80px;
+        }
+
+        .l_th{
+            border-right: solid 1px burlywood;
+            width: 150px;
+        }
+
+        .inner_check{
+            display: block;
+            float: left;
+            padding-left: 30px;
+        }
+
+        .pos_name{
+            margin-right: 20px;
+        }
+
+        .submit_admin_ch{
+            height: 30px;
+            float: right;
+            margin-right: 50px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: solid 1px burlywood;
+            width: 70px;
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="admin_info">管理员姓名: <input type="text" name="name" id="admin_name" value="{{ data.name }}"></div>
+        <div class="admin_info">管理员密码: <input type="text" name="password" id="password"></div>
+        <div>
+            <span>职位:</span>
+            {% for pos in all_position %}
+                {% if pos.id == data.position_id %}
+                    <span id_val="{{ pos.id }}" class="pos_name">{{ pos.name }}
+                        <input type="radio" name="pos" value="{{ pos.id }}" checked>
+                    </span>
+                {% else %}
+                    <span id_val="{{ pos.id }}" class="pos_name">{{ pos.name }}
+                    <input type="radio" name="pos" value="{{ pos.id }}">
+                </span>
+                {% endif %}
+            {% endfor %}
+            <span></span>
+        </div>
+        <div>
+            <table class="table">
+                {% for group, right in rights.items %}
+                    <tr>
+                        <th group_id="{{ group }}" class="l_th">
+                            <span>
+                            {{ right.0.1 }}<input type="checkbox" name="group" class="group" value="{{ group }}">
+                            </span>
+                        </th>
+                        <th class="r_th">
+                            {% for r in right %}
+                                {% if r.0 in own_rights %}
+                                    <span class="inner_check">{{ r.2 }}
+                                        <input type="checkbox" name="right" class="right" value="{{ r.0 }}" checked>
+                                    </span>
+                                {% else %}
+                                    <span class="inner_check">{{ r.2 }}
+                                        <input type="checkbox" name="right" class="right" value="{{ r.0 }}">
+                            </span>
+                                {% endif %}
+                            {% endfor %}
+                        </th>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="submit_admin_ch" id_val="{{ data.id }}">确认修改</div>
+    </div>
+</body>
+<script src="/static/js/jQuery-2.1.4.min.js"></script>
+<script src="/static/js/jquery.cookie.js"></script>
+<script src="/static/js/admin/admin.js"></script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .inner_page{
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+    <span class="inner_page first">首页</span>
+    <span class="inner_page last" cur_page="{{ cur_page }}">上一页</span>
+    {% for i in show_page %}
+        {% if i == cur_page %}
+            <span class="inner_page each_page cur_page">{{ i }}</span>
+        {% else %}
+            <span class="inner_page each_page">{{ i }}</span>
+        {% endif %}
+    {% endfor %}
+    <span class="inner_page next" cur_page="{{ cur_page }}" end="{{ page_num }}">下一页</span>
+    <span class="inner_page end" end="{{ page_num }}">尾页</span>
+    <span style="height: 30px; line-height: 30px">总条数{{ count }}
+    </span>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+*{
+    font-family: verdana,arial,sans-serif;
+}
+
+.del_sty{
+    float: right;
+    margin-right: 40px;
+}
+
+.info{
+    float: left;
+    margin-left: 40px;
+}
+
+.comment_content{
+    margin-left: 40px;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+hr{
+    margin-left: 40px;
+}
+
+.f{
+    margin-top: 7px;
+}

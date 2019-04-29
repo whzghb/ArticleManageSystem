@@ -1,0 +1,39 @@
+{% extends "article_o/base.html" %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/article_o/article_list.css">
+    <link rel="stylesheet" href="/static/css/article_o/public.css">
+{% endblock %}
+<{% block title %}<title>前端展示页</title>{% endblock %}
+{% block content %}
+   <div class="container">
+    {% for article in data %}
+        <div class="article inner" id_val="{{ article.id }}">
+            <a href="/article/?id={{ article.id }}" target="_blank">{{ article.title }}</a>
+        </div>
+        <div class="inner">
+            <div class="author">from:{{ article.author }}</div>
+            <div class="time">at:{{ article.pub_time | date:"Y-m-d H:i:s" }}</div>
+        </div>
+        <hr>
+    {% endfor %}
+    <div class="page">
+    <span class="inner_page first cursor">首页</span>
+    <span class="inner_page last cursor" cur_page="{{ cur_page }}">上一页</span>
+    {% for i in show_page %}
+        {% if i == cur_page %}
+            <span class="inner_page each_page cur_page cursor">{{ i }}</span>
+        {% else %}
+            <span class="inner_page each_page cursor">{{ i }}</span>
+        {% endif %}
+    {% endfor %}
+    <span class="inner_page next cursor" cur_page="{{ cur_page }}" end="{{ page_num }}">下一页</span>
+    <span class="inner_page end cursor" end="{{ page_num }}">尾页</span>
+</div>
+ </div>
+{% endblock %}
+{% block js %}
+    <script src="/static/js/jQuery-2.1.4.min.js" type="text/javascript"></script>
+        <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/public.js" type="text/javascript"></script>
+    <script src="/static/js/page_o.js" type="text/javascript"></script>
+{% endblock %}

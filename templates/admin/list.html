@@ -1,0 +1,42 @@
+{% extends "public/base.html" %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/admin/admin.css">
+{% endblock %}
+{% block content %}
+<div class="add_admin" style="width: 85px">添加管理员</div>
+<table class="gridtable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>职位</th>
+            <th>最后登录ip</th>
+            <th>添加时间</th>
+            <th>最后登录时间</th>
+            <th>登录次数</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+<tbody>
+{% for obj in data %}
+    <tr>
+	    <td id_val="{{ obj.id }}">{{ forloop.counter }}</td>
+        <td>{{ obj.name }}</td>
+        <td>{{ obj.pos }}</td>
+        <td>{{ obj.last_log_ip }}</td>
+        <td>{{ obj.add_time | date:"Y-m-d H:i:s" }}</td>
+        <td>{{ obj.last_log_time | date:"Y-m-d H:i:s" }}</td>
+        <td>{{ obj.log_times }}</td>
+        <td><span class="detail cursor" id_val="{{ obj.id }}">查看</span><span>|</span>
+            <span class="delete_obj cursor" id_val="{{ obj.id }}">删除</span></td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
+{% block js %}
+<script src="/static/js/jQuery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+<script src="/static/js/public.js" type="text/javascript"></script>
+<script src="/static/js/admin/admin.js"></script>
+{% endblock %}

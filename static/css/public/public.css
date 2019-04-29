@@ -1,0 +1,150 @@
+*{
+    font-family: verdana,arial,sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.current{
+    color: darkgrey;
+}
+
+#nav {
+    background-color: #eeeeee;
+    height: auto;
+    width:100%;
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 30%;
+    list-style: none;
+    overflow: hidden;
+}
+
+#section {
+    width:350px;
+    float:left;
+    padding:20px;
+}
+
+.second_level {
+    display: none;
+    text-align: left;
+    list-style: none;
+    /*background-color: aliceblue;*/
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.second_level li{
+    padding-left: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.page{
+    position: absolute;
+    left: 40px;
+    bottom: 26px;
+}
+
+.inner_page{
+    display: inline-block;
+    float: left;
+    padding-right: 10px;
+    width: 48px;
+    height: 30px;
+    border: solid 1px darkgrey;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 30px;
+}
+
+.cur_page{
+    background-color: darkgrey;
+}
+
+table.gridtable {
+	font-size:13px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+    width: 100%;
+}
+table.gridtable th {
+    text-align: left;
+	border-width: 1px;
+	padding: 12px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 12px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    /*height: 30px;*/
+}
+
+.red_font{
+    color: #2e6da4;
+}
+
+.title{
+    float: left;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.search{
+    float: right;
+    margin-right: 40px;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.not_display{
+    display: none;
+}
+
+.add_pos{
+    font-size: 15px;
+    margin-left: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    border: solid 1px darkgrey;
+    width: 64px;
+}
+
+.middle{
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.first_level{
+    /*background-color: #faebcc;*/
+    /*clear: left;*/
+}
+
+.cursor{
+    cursor: pointer;
+}

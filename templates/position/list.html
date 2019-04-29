@@ -1,0 +1,35 @@
+{% extends "public/base.html" %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/public/public.css">
+{% endblock %}
+{% block content %}
+<div class="add_pos" href="/system/position/add/">添加职位</div>
+<table class="gridtable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>职位名称</th>
+            <th>添加时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+<tbody>
+{% for obj in data %}
+    <tr>
+	    <td id_val="{{ obj.id }}">{{ forloop.counter }}</td>
+        <td>{{ obj.name }}</td>
+        <td>{{ obj.add_time | date:"Y-m-d H:i:s" }}</td>
+        <td><span class="detail cursor" id_val="{{ obj.id }}">查看</span><span>|</span>
+            <span class="delete_obj cursor" id_val="{{ obj.id }}">删除</span>
+        </td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
+{% block js %}
+    <script src="/static/js/jQuery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/public.js" type="text/javascript"></script>
+    <script src="/static/js/system/system.js"></script>
+{% endblock %}

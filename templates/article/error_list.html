@@ -1,0 +1,42 @@
+{% extends "public/base.html" %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/article/article.css">
+{% endblock %}
+{% block content %}
+<div class="title">{{ title }}</div>
+<div class="search cursor"><input type="text" name="query"><span class="query">搜索</span></div>
+<table class="gridtable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>文章名称</th>
+            <th>添加人</th>
+            <th>发布时间</th>
+            <th>好评数</th>
+            <th>差评数</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+<tbody>
+{% for key,value in res.items %}
+    <tr>
+	    <td id_val="{{ key }}">{{ forloop.counter }}</td>
+        <td>{{ value.2 }}</td>
+        <td>{{ value.0 }}</td>
+        <td>{{ value.1 | date:"Y-m-d H:i:s" }}</td>
+        <td>{{ value.3  }}</td>
+        <td>{{ value.4 }}</td>
+        <td><span class="detail cursor" id_val="{{ key }}">查看</span><span>|</span>
+            <span class="delete_obj cursor" id_val="{{ key }}">删除</span></td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% include "public/page.html" %}
+{% endblock %}
+{% block js %}
+<script src="/static/js/jQuery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+<script src="/static/js/public.js" type="text/javascript"></script>
+<script src="/static/js/page.js" type="text/javascript"></script>
+{% endblock %}

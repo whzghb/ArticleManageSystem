@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+{#    <link rel="stylesheet" href="/static/css/article_o/article_detail.css">#}
+    <link rel="stylesheet" href="/static/css/data/article_ana.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <title>Title</title>
+</head>
+<body>
+    <div class="f">标&nbsp;&nbsp;&nbsp;题:{{ data.title }}</div>
+    <div>好评数:{{ good_view }}</div>
+    <div>差评数:{{ bad_view }}</div>
+    <div>评论数:{{ count }}</div>
+    <div class="all_comments">
+        {% if not comments %}
+            <div>&nbsp;&nbsp;&nbsp;暂无评论</div>
+        {% else %}
+            {% for comment in comments %}
+                {% if comment.parent_comment.id == None %}
+                    <div class="each_comment">
+                        <div class="info">
+                        <span>{{ comment.user.name }}:</span>
+                        <span>{{ comment.comment_time | date:"Y-m-d H:i:s" }}&nbsp;</span>
+                        <span>好评({{ comment.good_view }})</span>
+                        <span>差评({{ comment.bad_view }})</span>
+                        </div>
+                        {% if comment.is_deleted == 0 %}
+                        <div class="cursor del_sty"><span id_val="{{ comment.id }}" class="del_com">删除</span></div>
+                        {% elif comment.is_deleted == 1 %}
+                        <div class="del_sty"><span>已被用户删除</span></div>
+                        {% else %}
+                        <div class="del_sty"><span id_val="{{ comment.id }}" class="del_com cursor">恢复</span></div>
+                        {% endif %}
+                    </div>
+                    <hr style="clear: both; visibility: hidden">
+                    <p class="comment_content">{{ comment.content }}</p>
+                {% else %}
+                    <div class="each_comment">
+                            <div class="info">
+                                <span>{{ comment.user.name }}:</span>
+                                <span>{{ comment.comment_time | date:"Y-m-d H:i:s" }}&nbsp;</span>
+                                <span>好评({{ comment.good_view }})</span>
+                                <span>差评({{ comment.bad_view }})</span>
+                            </div>
+                           {% if comment.is_deleted == 0 %}
+                        <div class="cursor del_sty"><span id_val="{{ comment.id }}" class="del_com">删除</span></div>
+                        {% elif comment.is_deleted == 1 %}
+                        <div class="del_sty"><span>已被用户删除</span></div>
+                        {% else %}
+                        <div class="del_sty"><span id_val="{{ comment.id }}" class="del_com cursor">删除</span></div>
+                        {% endif %}
+                    </div>
+                    <hr style="clear: both; visibility: hidden" class="comment_content">
+                    <p class="comment_content">{{ comment.content }}//@{{ comment.parent_comment.user.name }}:
+                                {{ comment.parent_comment.content }}
+                    </p>
+                {% endif %}
+                <hr>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+<script src="/static/js/jQuery-2.1.4.min.js"></script>
+<script src="/static/js/jquery.cookie.js"></script>
+<script src="/static/js/article_ana.js"></script>
+</html>

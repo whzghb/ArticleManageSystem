@@ -1,0 +1,65 @@
+{% extends "public/base.html" %}
+{% load staticfiles %}
+{% block css %}<link rel="stylesheet" href="/static/css/article/article_add.css">{% endblock %}
+{% block header %}
+    <div class="header">
+        作者:<div class="inner"><input id="author" type="text" value="{{ data.author }}"></div>
+        标题:<div class="inner"><input id="title" type="text" value="{{ data.title }}"></div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div id="editor"></div>
+{% endblock %}
+{% block footer %}
+    <div class="footer">
+        选择封面:<div class="inner file">
+            <img id="img" src="{{ data.img }}"><input type="file" id="feng_mian">
+        </div>
+        选择分类:<div><input type="text" name="add_in" url="/admin/category/" cls="category" placeholder="添加分类"></div>
+        <div class="categorys inner">
+        {% for cat in category %}
+            {% if data.category_id == cat.id %}
+                <span><input class="category" type="radio" name="category" value="{{ cat.id }}" checked>{{ cat.name }}</span>
+            {% else %}
+                <span><input class="category" type="radio" name="category" value="{{ cat.id }}">{{ cat.name }}</span>
+            {% endif %}
+        {% endfor %}
+        </div>
+        选择标签:<div><input type="text" name="add_in" url="/admin/tag/" cls="tag" placeholder="添加标签"></div>
+        <div class="tags inner">
+        {% for tg in tag %}
+            {% if tg in data.tags %}
+                <span><input class="tag" type="checkbox" name="tag" value="{{ tg.id }}" checked>{{ tg.name }}</span>
+            {% else %}
+                <span><input class="tag" type="checkbox" name="tag" value="{{ tg.id }}">{{ tg.name }}</span>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+    <div class="submit">
+        <span class="inner edit_draft" id_val="{{ data.id }}">保存至草稿箱</span>
+        <span class="inner edit_audit" id_val="{{ data.id }}">提交至待审核</span>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="/static/js/jQuery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/wangEditor.min.js" type="text/javascript"></script>
+    <script src="/static/js/article_i/article_add.js" type="text/javascript"></script>
+    <script>
+        {#var E = window.wangEditor;#}
+        {#var editor = new E('#editor');#}
+        {#editor.customConfig.uploadImgShowBase64 = true;#}
+        {#editor.create();#}
+        var E = window.wangEditor;
+        var editor = new E('#editor');
+        editor.customConfig.uploadImgServer = '/common/uploads/img/';
+        editor.customConfig.uploadImgHeaders = {
+            "X-CSRFToken": $.cookie("csrftoken")
+        };
+        editor.customConfig.uploadFileName = 'img';
+        editor.customConfig.uploadImgMaxLength = 5;
+        editor.create();
+        editor.txt.html('{{ data.content | safe }}')
+    </script>
+{% endblock %}

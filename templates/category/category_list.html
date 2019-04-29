@@ -1,0 +1,31 @@
+{% extends "public/base.html" %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/public/public.css">
+{% endblock %}
+{% block content %}
+<table class="gridtable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+<tbody>
+{% for obj in data %}
+    <tr>
+	    <td id_val="{{ obj.id }}">{{ forloop.counter }}</td>
+        <td>{{ obj.name }}</td>
+        <td class="delete_obj cursor" id_val="{{ obj.id }}">删除</td>
+    </tr>
+{% endfor %}
+<div class="add"><input type="text" name="add" placeholder="添加分类">
+        <span class="submit_add cursor">添加</span>
+</div>
+</tbody>
+{% endblock %}
+{% block js %}
+    <script src="/static/js/jQuery-2.1.4.min.js" type="text/javascript"></script>
+        <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/public.js" type="text/javascript"></script>
+{% endblock %}

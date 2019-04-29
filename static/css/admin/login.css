@@ -1,0 +1,48 @@
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+body{
+    background-image: url("/static/img/b_img02.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+.logo{
+    font-family: "Mishafi Gold";
+    font-size: 40px;
+    margin-left: 50px;
+    margin-top: 30px;
+    color: deepskyblue;
+}
+
+.title{
+    font-family: "Microsoft Sans Serif";
+    font-size: 30px;
+    text-align: center;
+    margin-top: 100px;
+    color: cadetblue;
+}
+
+.input_area{
+    width: 400px;
+    height: 300px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: 20px;
+}
+
+.inner{
+    text-align: center;
+    padding-top: 40px;
+    color: cadetblue;
+}
+
+#login{
+    cursor:pointer;
+}

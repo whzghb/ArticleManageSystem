@@ -1,0 +1,90 @@
+{% extends "public/base.html" %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/article/article.css">
+    <link rel="stylesheet" href="/static/css/public/public.css">
+{% endblock %}
+{% block content %}
+    <div class="middle" style="margin-top: 10px">用户最近注册(人数)</div>
+    <table class="gridtable">
+        <thead>
+        <tr>
+            <th>今日注册</th>
+            <th>三日内注册</th>
+            <th>七日内注册</th>
+            <th>十五日内注册</th>
+            <th>三十日内注册</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            {% for num in count_reg %}
+                <td>{{ num }}</td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="middle">用户最近登录(人数)</div>
+    <table class="gridtable">
+        <thead>
+        <tr>
+            <th>今日登录</th>
+            <th>三日内登录</th>
+            <th>七日内登录</th>
+            <th>十五日登录</th>
+            <th>三十日内登录</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            {% for num in count_last_log %}
+                <td>{{ num }}</td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="middle">用户最近评价(数量)</div>
+    <table class="gridtable">
+        <thead>
+        <tr>
+            <th>今日评价</th>
+            <th>三日内评价</th>
+            <th>七日内评价</th>
+            <th>十五日内评价</th>
+            <th>三十日内评价</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            {% for num in count_feedback %}
+                <td>{{ num }}</td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="middle">用户最近评论(数量)</div>
+    <table class="gridtable">
+        <thead>
+        <tr>
+            <th>今日评论</th>
+            <th>三日内评论</th>
+            <th>七日内评论</th>
+            <th>十五日内评论</th>
+            <th>三十日内评论</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            {% for num in count_comment %}
+                <td>{{ num }}</td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
+{% block js %}
+    <script src="/static/js/jQuery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="/static/js/public.js" type="text/javascript"></script>
+{% endblock %}

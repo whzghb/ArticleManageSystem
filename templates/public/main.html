@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章发布管理系统</title>
+    <link rel="icon" href="/static/img/logo.jpg" type="image/x-icon"/>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #menu, #content{
+            float: left;
+        }
+        #header {
+            background-color: lightblue;
+            color:white;
+            text-align:left;
+            height: 80px;
+            line-height: 80px;
+            padding: 5px 30px;
+        }
+        .right{
+            float: right;
+            padding-left: 20px;
+        }
+        .left{
+            float: left;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="left"><h1>文章发布管理系统</h1></div>
+        <div class="right"><a href="/admin/logout/">注销</a></div>
+        <div class="right" id="admin"></div>
+    </div>
+    <iframe id="menu" src='/admin/outer/' name="menu" width="20%" height="650px"></iframe>
+    <iframe id="content" src='/admin/article_i/draft/' name="content" width="79%" height="650px"></iframe>
+</body>
+    <script src="/static/js/jQuery-2.1.4.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script>
+        $(function () {
+            var name = $.cookie("admin_name");
+            var str = "";
+            var s = name.split('\\u');
+            for(var i = 0;i < s.length;i++){
+                str += String.fromCharCode(parseInt(s[i],16))+"\t";
+            }
+            $("#admin").text(str);
+        });
+        $(function () {
+            var name = $.cookie("admin_name");
+            if (name.indexOf("\\u")>0) {
+				var str = "";
+				var s = name.split('\\u');
+				for (var i = 0; i < s.length; i++) {
+					if (s[i].length > 4) {
+						str += String.fromCharCode(parseInt(s[i].slice(0, 4), 16)) + "\t";
+						str += s[i].slice(4, -1);
+					}
+					else {
+						str += String.fromCharCode(parseInt(s[i], 16)) + "\t";
+					}
+				}
+			}
+			else {
+				str = name.replace('"', '').replace('"', '');
+			}
+			$("#admin").text(str);
+        });
+    </script>
+</html>
