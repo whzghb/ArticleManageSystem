@@ -150,3 +150,5 @@ class LogView(AdminLoggedMixin, View):
         self.search_field = ["model", "method", "admin", "name"]
         return super().get(request)
 
+# sql = INSERT INTO common_admin (email, password, name, add_time,last_log_time,last_log_ip,log_times,is_sysop,is_deleted) values ('111@qq.com','d78ac8bacfea6531c8153421f4cc5207','root','1970-01-01 00:00:00','1970-01-01 00:00:00','127.0.0.1',1,1,0)
+

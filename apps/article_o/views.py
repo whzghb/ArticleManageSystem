@@ -82,10 +82,14 @@ class UserArticleView(FrontLoggedMixin, View):
     def get_change(self, request):
         if not self.if_list:
             obj_id = request.GET.get("id")
-            obj = Article.objects.get(id=obj_id)
-            obj.read_times += 1
-            obj.last_read_time = datetime.now().strftime(DATETIME_FORMAT)
-            obj.save()
+            try:
+                obj = Article.objects.get(id=obj_id)
+            except Exception:
+                self.template = "public/error.html"
+            else:
+                obj.read_times += 1
+                obj.last_read_time = datetime.now().strftime(DATETIME_FORMAT)
+                obj.save()
 
     def get(self, request):
         cur_page = request.GET.get("page", "1")
@@ -96,6 +100,8 @@ class UserArticleView(FrontLoggedMixin, View):
         self.get_list_values()
         self.get_detail_values()
         self.get_change(request)
+        if self.template:
+            return render(request, self.template)
         self.get_template()
         return super().get(request)
 

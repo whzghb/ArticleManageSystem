@@ -362,5 +362,21 @@ $("input[name='add_in']").keydown(function(e){
 });
 
 
-
+$("#video").change(function () {
+   var file_obj = $("#video")[0].files[0];
+   var fd = new FormData();
+   fd.append('video', file_obj);
+   $.ajax({
+       url: "/common/video/",
+       type: "post",
+       headers: {"X-CSRFToken": $.cookie("csrftoken")},
+       data: fd,
+       processData: false,
+       contentType: false,
+       success: function (res) {
+           var obj = JSON.parse(res);
+           $("#addr").text(obj.url);
+       }
+   })
+});
 

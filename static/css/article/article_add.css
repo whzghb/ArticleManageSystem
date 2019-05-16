@@ -37,3 +37,13 @@
     width: 80px;
     height: 80px;
 }
+
+#editor{
+    margin-top: 20px;
+}
+
+.fenge{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    clear: both;
+}

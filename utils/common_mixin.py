@@ -665,7 +665,7 @@ class FrontLoggedMixin(FrontMixin, View):
             else:
                 self.error["code"] = "404"
                 self.error["msg"] = "404 Not Found 未找到"
-                self.template = "error.html"
+                self.template = "public/error.html"
         return super().get(request)
 
     def post(self, request):

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from django.views import View
-
+from celery_tasks import tasks
 from common.models import Comment
 from utils import functions
 from utils.common_mixin import AdminMixin, FrontMixin
@@ -47,4 +47,29 @@ class CommentUserDel(FrontMixin, View):
         obj.save()
         self.is_ajax = 1
         return super().get(request)
+
+
+class VideoView(AdminMixin, View):
+    def request_2_json(self):
+        return self.request.__dict__
+
+    def get(self, request):
+        name = request.GET.get("name")
+        self.template = 'common/iframe_movie.html'
+        self.context = {"name": name}
+        return super().get(request)
+
+    def post(self, request):
+        self.is_ajax = 1
+        # <iframe style="width: 500px; height: 290px; overflow: hidden" src="http://127.0.0.1:9000/common/video?name=n0754qi98ej.mp4"></iframe>
+        name = tasks.write_video(request, "video")
+        url = '<iframe style="width: 500px; height: 290px; overflow: hidden" ' \
+              'src="{}"></iframe>'.format(name)
+        print(url)
+        self.context.update({"url": url})
+        return super().post(request)
+
+
+
+
 

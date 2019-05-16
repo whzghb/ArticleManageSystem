@@ -5,10 +5,12 @@
     <div class="header">
         作者:<div class="inner"><input id="author" type="text" value="{{ data.author }}"></div>
         标题:<div class="inner"><input id="title" type="text" value="{{ data.title }}"></div>
+        <div style="clear: both" class="inner">iframe地址:<div id="addr"></div></div>
+        上传视频:<div class="inner"><input id="video" type="file"></div>
     </div>
 {% endblock %}
 {% block content %}
-    <div id="editor"></div>
+    <div id="editor" style="margin-top: 10px; clear: both"></div>
 {% endblock %}
 {% block footer %}
     <div class="footer">
